@@ -21,10 +21,9 @@ void main(int argc,char *argv[])
 	FILE *res_f=fopen(argv[3],"w");
 	int p_chiper[2];
 	int p_file[2];
-	int chip,result = 0;
+	int chip=0;
 	char data;
-	size_t n1,n2;
-	
+
 	if(strcmp(argv[1],"1")==0)
 	{
 		key=fopen("key","w");
@@ -73,10 +72,10 @@ void main(int argc,char *argv[])
 				default:
 					close(p_file[1]);
 					close(p_chiper[1]);
-					while((n2=read(p_file[0],&data,1))>0)
+					while((size_t n2=read(p_file[0],&data,1))>0)
 					{
-						n1=read(p_chiper[0],&chip,1);
-						result=data^chip;
+						size_t n1=read(p_chiper[0],&chip,1);
+						int result=data^chip;
 						fputc(result,res_f);
 						if(strcmp(argv[1],"1")==0)
 							fputc(chip,key);
