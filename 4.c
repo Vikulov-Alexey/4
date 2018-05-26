@@ -22,6 +22,7 @@ void main(int argc,char *argv[])
 	int p_chiper[2];
 	int p_file[2];
 	int chip=0;
+	size_t n2;
 	char data;
 
 	if(strcmp(argv[1],"1")==0)
@@ -52,7 +53,7 @@ void main(int argc,char *argv[])
 			
 			if(strcmp(argv[1],"1")==0)
 				generate();		//Данная функция передает сгенерированный ключ
-								//На стандартный вывод, коем является p_chiper[1]
+							//На стандартный вывод, коем является p_chiper[1]
 			if(strcmp(argv[1],"2")==0)
 				execlp("cat","cat","key",NULL);
 		default:
@@ -72,7 +73,7 @@ void main(int argc,char *argv[])
 				default:
 					close(p_file[1]);
 					close(p_chiper[1]);
-					while((size_t n2=read(p_file[0],&data,1))>0)
+					while((n2=read(p_file[0],&data,1))>0)
 					{
 						size_t n1=read(p_chiper[0],&chip,1);
 						int result=data^chip;
@@ -81,7 +82,7 @@ void main(int argc,char *argv[])
 							fputc(chip,key);
 					}
 					if (strcmp(argv[1],"1")==0) 
-					fclose(key);
+						fclose(key);
 					fclose(res_f);
 			}
 	}
